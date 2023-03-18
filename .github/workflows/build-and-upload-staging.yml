@@ -22,9 +22,6 @@ jobs:
     needs: build-and-upload
     runs-on: ubuntu-latest
     steps: 
-      - run: |
-          echo "${{needs.build-and-upload.outputs.changed_modules}}"
-          echo "${{needs.build-and-upload.outputs.changed_modules}}"
-          echo "${{needs.build-and-upload.outputs.image-tag}}"
+      - run: echo "${{needs.build-and-upload.outputs.changed_modules}}" "${{needs.build-and-upload.outputs.image-tag}}"
         
       

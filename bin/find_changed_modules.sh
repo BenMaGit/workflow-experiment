@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Store the hash of the previous commit
-PREVIOUS_COMMIT=$(git rev-parse HEAD^)
+PREVIOUS_COMMIT=${{ github.event.before }}
 
 # Store the hash of the current commit
-CURRENT_COMMIT=$(git rev-parse HEAD)
+CURRENT_COMMIT=${{ github.sha }}
 
 
 # Output the hashes of the previous and current commits for reference
