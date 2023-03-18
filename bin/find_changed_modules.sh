@@ -15,4 +15,4 @@ MODULE_DIRS=('test_1','test_2')
 
 
 # Output the array of directory names under the "modules" directory that have changed files
-echo "${MODULE_DIRS}" 
+echo "${MODULE_DIRS[*]}" 
