@@ -18,7 +18,7 @@ jobs:
         id: set-matrix
         run: |
           modules=$(./bin/find_changed_modules.sh)
-          echo "matrix=modules]" >> $GITHUB_OUTPUT
+          echo "matrix=$(modules)" >> $GITHUB_OUTPUT
       - name: Shorten commit hash
         id: shorten-commit
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
