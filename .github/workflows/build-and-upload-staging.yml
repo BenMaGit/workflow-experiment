@@ -18,6 +18,7 @@ jobs:
         id: set-matrix
         run: |
           modules=$(./bin/find_changed_modules.sh)
+          echo ${modules}
           test=[\"${modules//', '/\",\"}\"]
           echo ${test}
           echo "matrix=[\"${modules//', '/\",\"}\"]" >> $GITHUB_OUTPUT
