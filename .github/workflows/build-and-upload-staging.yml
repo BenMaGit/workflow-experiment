@@ -14,22 +14,21 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Find changed modules
-        id: find-modules
+      - name: Set changed modules as matrix
+        id: set-matrix
         run: |
           modules=$(./bin/find_changed_modules.sh)
           echo "matrix=[\"${modules//', '/\",\"}\"]" >> $GITHUB_OUTPUT
-          echo "[\"${modules}\"]"
       - name: Shorten commit hash
         id: shorten-commit
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
   job2:
     needs: job1
     runs-on: ubuntu-latest
+    strategy:
+      matrix: "${{needs.job1.outputs.matrix}}"
     steps: 
-      - name: Shorten commit hash
-        id: shorten-commit
+      - name: print image tag
         run: |
-          echo "${{needs.job1.outputs.changed-modules}}"
           echo "${{needs.job1.outputs.image-tag}}"
       
