@@ -25,4 +25,4 @@ do
 done
 
 # Output the array of directory names under the "modules" directory that have changed files
-echo "${MODULE_DIRS}"
+echo "${MODULE_DIRS[@]}"
