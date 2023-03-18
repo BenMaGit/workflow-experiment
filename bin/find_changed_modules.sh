@@ -15,10 +15,10 @@ MODULE_DIRS=()
 # Loop through the array of changed directories and check if any of them are subdirectories of the "modules" directory
 for DIR in "${CHANGED_DIRS[@]}"
 do
-    if [[ "$DIR" == "modules/"* && $(echo "$DIR" | tr -cd '/' | wc -c) -eq 2 ]]; then
+    if [[ "$DIR" == "modules/"* && $(echo "$DIR" | tr -cd '/' | wc -c) -gt 0 ]]; then
         # Get the name of the subdirectory under "modules"
         DIR_NAME=$(echo "$DIR" | cut -d'/' -f2)
-
+      
         # Add the name of the subdirectory to the MODULE_DIRS array
         MODULE_DIRS+=("$DIR_NAME")
     fi
