@@ -29,5 +29,21 @@ jobs:
         run: |
           echo "${{needs.job1.outputs.changed_modules}}"
           echo "${{needs.job1.outputs.image-tag}}"
+  job3:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
+    steps:
+    - id: step1
+      run: echo "test=hello" >> $GITHUB_OUTPUT
+    - id: step2
+      run: echo "test=world" >> $GITHUB_OUTPUT
+  job4:
+    runs-on: ubuntu-latest
+    needs: job3
+    steps:
+    - run: echo ${{needs.job3.outputs.output1}} ${{needs.job3.outputs.output2}}
         
       
