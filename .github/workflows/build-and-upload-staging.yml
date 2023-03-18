@@ -21,10 +21,6 @@ jobs:
       - name: Shorten commit hash
         id: shorten-commit
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      - name: print
-        run: |
-          echo "${{steps.find-modules.outputs.modules}}"
-          echo "${{steps.shorten-commit.outputs.sha_short}}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
@@ -32,6 +28,6 @@ jobs:
       - name: Shorten commit hash
         id: shorten-commit
         run: |
-          echo "${{needs.job1.outputs.changed_modules}}"
+          echo "${{needs.job1.outputs.changed-modules}}"
           echo "${{needs.job1.outputs.image-tag}}"
       
