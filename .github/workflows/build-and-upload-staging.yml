@@ -24,8 +24,8 @@ jobs:
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: debug
         run: |
-          echo "${{set-matrix.outputs.image-tag}}"
-          echo "${{shorten-commit.outputs.matrix}}"
+          echo "${{steps.set-matrix.outputs.matrix}}"
+          echo "${{steps.shorten-commit.outputs.sha_short}}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
