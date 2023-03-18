@@ -7,7 +7,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{steps.find-modules.outputs.matrix}}
+      matrix: ${{steps.set-matrix.outputs.matrix}}
       image-tag: ${{steps.shorten-commit.outputs.sha_short}}
     steps:
       - name: Checkout code
