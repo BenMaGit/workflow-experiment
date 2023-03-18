@@ -32,6 +32,7 @@ jobs:
     strategy:
       matrix:
         module: ${{fromJson(needs.job1.outputs.matrix)}}
+        environment: [staging,production]
     steps: 
       - name: print image tag
         run: |
