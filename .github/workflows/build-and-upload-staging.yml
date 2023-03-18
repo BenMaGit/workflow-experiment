@@ -4,7 +4,7 @@ on:
     branches:
       - "main"
 jobs:
-  build-and-upload:
+  job1:
     runs-on: ubuntu-latest
     outputs:
       changed-modules: steps.find-modules.outputs.modules
@@ -16,14 +16,18 @@ jobs:
           fetch-depth: 0
       - name: Find changed modules
         id: find-modules
-        run: bash ./bin/find_changed_modules.sh
+        run: bash ./bin/find_changed_modules.sh >> $GITHUB_OUTPUT
       - name: Shorten commit hash
         id: shorten-commit
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-  print-output:
+  job2:
     needs: build-and-upload
     runs-on: ubuntu-latest
     steps: 
-      - run: echo "${{needs.build-and-upload.outputs.changed_modules}}" "${{needs.build-and-upload.outputs.image-tag}}"
+      - name: Shorten commit hash
+        id: shorten-commit
+        run: |
+          echo "${{needs.build-and-upload.outputs.changed_modules}}"
+          echo "${{needs.build-and-upload.outputs.image-tag}}"
         
       
