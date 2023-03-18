@@ -33,6 +33,7 @@ jobs:
       matrix:
         module: ${{fromJson(needs.job1.outputs.matrix)}}
         environment: [staging,production]
+    environment: matrix.environment
     steps: 
       - name: print image tag
         run: |
