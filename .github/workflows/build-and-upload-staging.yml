@@ -29,9 +29,6 @@ jobs:
   job2:
     needs: job1
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        module: ${{needs.job1.outputs.matrix}}
     steps: 
       - name: print image tag
         run: |
