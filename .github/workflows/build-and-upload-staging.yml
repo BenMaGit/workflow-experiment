@@ -18,6 +18,8 @@ jobs:
         id: set-matrix
         run: |
           modules=$(./bin/find_changed_modules.sh)
+          test=[\"${modules//', '/\",\"}\"]
+          echo ${test}
           echo "matrix=[\"${modules//', '/\",\"}\"]" >> $GITHUB_OUTPUT
       - name: Shorten commit hash
         id: shorten-commit
