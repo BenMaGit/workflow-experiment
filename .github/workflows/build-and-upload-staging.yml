@@ -25,11 +25,9 @@ jobs:
   job2:
     needs: job1
     runs-on: ubuntu-latest
-    strategy:
-      matrix: 
-        module: ${{fromJson(needs.job1.outputs.matrix)}}
     steps: 
       - name: print image tag
         run: |
           echo "${{needs.job1.outputs.image-tag}}"
+          echo "${{needs.job1.outputs.matrix}}"
       
