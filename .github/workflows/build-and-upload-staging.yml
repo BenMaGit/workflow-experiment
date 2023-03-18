@@ -7,7 +7,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      changed-modules: ${{steps.find-modules.outputs.modules}}
+      changed-modules: ${{steps.find-modules.outputs.matrix}}
       image-tag: ${{steps.shorten-commit.outputs.sha_short}}
     steps:
       - name: Checkout code
@@ -17,7 +17,9 @@ jobs:
       - name: Find changed modules
         id: find-modules
         run: |
-          echo "modules=$(./bin/find_changed_modules.sh)" >> $GITHUB_OUTPUT
+          modules=$(./bin/find_changed_modules.sh)
+          echo "matrix=[\"${modules//', '/\",\"}\"]" >> $GITHUB_OUTPUT
+          echo "[\"${modules}\"]"
       - name: Shorten commit hash
         id: shorten-commit
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
