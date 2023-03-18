@@ -18,23 +18,21 @@ jobs:
         id: set-matrix
         run: |
           modules=$(./bin/find_changed_modules.sh)
-          echo "matrix=[\"${modules//', '/\",\"}\"] >> $GITHUB_OUTPUT
+          echo "matrix=[\"${modules//', '/\",\"}\"]" >> $GITHUB_OUTPUT
       - name: Shorten commit hash
         id: shorten-commit
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: debug
         run: |
-          echo "${{steps.set-matrix.outputs.matrix}}"
-          echo "${{steps.shorten-commit.outputs.sha_short}}"
+          echo ${{steps.set-matrix.outputs.matrix}}
+          echo ${{steps.shorten-commit.outputs.sha_short}}
   job2:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        module: ${{fromJSON(needs.job1.outputs.matrix)}}
+      matrix: 
+        module: ${{fromJson(needs.job1.outputs.matrix)}}
     steps: 
       - name: print image tag
         run: |
           echo "${{needs.job1.outputs.image-tag}}"
-          echo "${{needs.job1.outputs.matrix}}"
-      
